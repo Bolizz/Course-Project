@@ -1,6 +1,7 @@
-import React from "react";
 import React, { Fragment } from "react";
 import { Link, useLocation } from "react-router-dom";
+import EditableRow from "./editableRow";
+import ReadOnly from "./readOnly";
 import data from "./MOCK_DATA.json";
 import { useState } from "react";
 const Maintenance = () => {
@@ -9,20 +10,22 @@ const Maintenance = () => {
     jobID: "",
     car_info: "",
     mileage: "",
-    dateTime: "",
+    date: "",
+    time: "",
     license_plate: "",
     description: "",
-    status: false,
+    status: "",
   });
   const [getJobID, setJobID] = useState(null);
   const [editJob, setEditJob] = useState({
     jobID: "",
     car_info: "",
     mileage: "",
-    dateTime: "",
+    date: "",
+    time: "",
     license_plate: "",
     description: "",
-    status: false,
+    status: "",
   });
 
   //--------
@@ -34,20 +37,26 @@ const Maintenance = () => {
     setJobAssignment((prevArray) => [
       ...jobAssignment,
       {
+        jobID: addNewJob.jobID,
         car_info: addNewJob.car_info,
         mileage: addNewJob.mileage,
+        date: addNewJob.date,
+        time: addNewJob.time,
         license_plate: addNewJob.license_plate,
         sitting_capacity: addNewJob.sitting_capacity,
-        status: false,
+        status: addNewJob.status,
       },
     ]);
 
     setAddNewJob({
+      jobID: "",
       car_info: "",
       mileage: "",
+      date: "",
+      time: "",
       license_plate: "",
       sitting_capacity: "",
-      status: false,
+      status: "",
     });
   };
 
@@ -56,13 +65,17 @@ const Maintenance = () => {
   //--------
   const handleEditClick = (event, job) => {
     event.preventDefault();
-    setJobID(job.license_plate);
+    setJobID(job.jobID);
     setEditJob({
+      jobID: job.jobID,
       car_info: job.car_info,
       mileage: job.mileage,
+      date: job.date,
+      time: job.time,
       license_plate: job.license_plate,
+      description: job.description,
       sitting_capacity: job.sitting_capacity,
-      status: false,
+      status: job.status,
     });
   };
 
@@ -78,9 +91,13 @@ const Maintenance = () => {
       (job) => job.license_plate === getJobID
     );
     neweditJobs[index] = {
+      jobID: editJob.jobID,
       car_info: editJob.car_info,
       mileage: editJob.mileage,
+      date: editJob.date,
+      time: editJob.time,
       license_plate: editJob.license_plate,
+
       sitting_capacity: editJob.sitting_capacity,
       status: editJob.status,
     };
@@ -99,7 +116,7 @@ const Maintenance = () => {
   //-----
   const handleDeleteClick = (jobID) => {
     var newJobs = [...jobAssignment];
-    const index = jobAssignment.findIndex((job) => job.license_plate === jobID);
+    const index = jobAssignment.findIndex((job) => job.jobID === jobID);
     newJobs.splice(index, 1);
     setJobAssignment(newJobs);
   };
@@ -116,17 +133,20 @@ const Maintenance = () => {
         <table>
           <thead>
             <tr>
-              <th>car_info</th>
+              <th>jobID</th>
               <th>mileage</th>
+              <th>Date</th>
+              <th>Time</th>
               <th>License Plate</th>
-              <th>Sitting Capacity</th>
+              <th>Description</th>
+              <th>status</th>
             </tr>
           </thead>
 
           <tbody>
             {jobAssignment.map((job) => (
               <Fragment>
-                {getJobID === job.license_plate ? (
+                {getJobID === job.jobID ? (
                   <EditableRow
                     editJob={editJob}
                     handleEditChange={handleEditChange}
@@ -137,7 +157,6 @@ const Maintenance = () => {
                     job={job}
                     handleEditClick={handleEditClick}
                     handleDeleteClick={handleDeleteClick}
-                    handleAddAuction={handleAddAuction}
                   />
                 )}
               </Fragment>
@@ -147,6 +166,19 @@ const Maintenance = () => {
       </form>
       <div>
         <form onSubmit={handleAddSubmit}>
+          <input
+            className="input"
+            type="integer"
+            name="JobID"
+            onChange={(e) => {
+              setAddNewJob({
+                ...addNewJob,
+                jobID: e.target.value,
+              });
+            }}
+            value={addNewJob.jobID}
+            placeholder="please enter the Job ID: "
+          ></input>
           <input
             className="input"
             type="text"
@@ -171,6 +203,24 @@ const Maintenance = () => {
           ></input>
           <input
             className="input"
+            type="date"
+            onChange={(e) => {
+              setAddNewJob({ ...addNewJob, date: e.target.value });
+            }}
+            value={addNewJob.date}
+            placeholder="please enter the date: "
+          ></input>
+          <input
+            className="input"
+            type="time"
+            onChange={(e) => {
+              setAddNewJob({ ...addNewJob, time: e.target.value });
+            }}
+            value={addNewJob.time}
+            placeholder="please enter the time: "
+          ></input>
+          <input
+            className="input"
             type="text"
             onChange={(e) => {
               setAddNewJob({ ...addNewJob, license_plate: e.target.value });
@@ -178,17 +228,30 @@ const Maintenance = () => {
             value={addNewJob.license_plate}
             placeholder="please enter the License Plate: "
           ></input>
+
           <input
             className="input"
-            type="integer"
-            value={addNewJob.sitting_capacity}
+            type="text"
+            value={addNewJob.description}
             onChange={(e) => {
               setAddNewJob({
                 ...addNewJob,
-                sitting_capacity: e.target.value,
+                description: e.target.value,
               });
             }}
-            placeholder="please enter the sitting capacity: "
+            placeholder="please enter the description: "
+          ></input>
+          <input
+            className="input"
+            type="text"
+            value={addNewJob.status}
+            onChange={(e) => {
+              setAddNewJob({
+                ...addNewJob,
+                status: e.target.value,
+              });
+            }}
+            placeholder="please enter the Status: "
           ></input>
           <button className="add-driver">Add</button>
         </form>

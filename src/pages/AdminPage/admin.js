@@ -11,10 +11,10 @@ const admin = () => {
         <Link to="/drivers">
           <p className="box">Drivers</p>
         </Link>
-        <Link className="box" to="/drivers">
+        <Link className="box" to="/maintenance">
           <p>Maintenance</p>
         </Link>
-        <Link className="box" to="/drivers">
+        <Link className="box" to="/fueling">
           <p>Fuel filler</p>
         </Link>
         <Link className="box" to="/vehicles">
