@@ -1,0 +1,92 @@
+[
+  {
+    "jobID": 1,
+    "car_info": "Toyota Camry",
+    "mileage": 50000,
+    "dateTime": "2023-01-15T10:30:00Z",
+    "license_plate": "ABC123",
+    "description": "Oil Change",
+    "status": "Active"
+  },
+  {
+    "jobID": 2,
+    "car_info": "Honda Accord",
+    "mileage": 60000,
+    "dateTime": "2023-02-20T14:45:00Z",
+    "license_plate": "XYZ456",
+    "description": "Brake Inspection",
+    "status": "Active"
+  },
+  {
+    "jobID": 3,
+    "car_info": "Ford Mustang",
+    "mileage": 30000,
+    "dateTime": "2023-03-05T09:15:00Z",
+    "license_plate": "DEF789",
+    "description": "Tire Rotation",
+    "status": "Non-Active"
+  },
+  {
+    "jobID": 4,
+    "car_info": "Chevrolet Malibu",
+    "mileage": 45000,
+    "dateTime": "2023-04-10T12:00:00Z",
+    "license_plate": "GHI101",
+    "description": "Air Filter Replacement",
+    "status": "Active"
+  },
+  {
+    "jobID": 5,
+    "car_info": "Nissan Altima",
+    "mileage": 70000,
+    "dateTime": "2023-05-25T16:20:00Z",
+    "license_plate": "JKL202",
+    "description": "Battery Check",
+    "status": "Non-Active"
+  },
+  {
+    "jobID": 6,
+    "car_info": "BMW 3 Series",
+    "mileage": 55000,
+    "dateTime": "2023-06-30T11:40:00Z",
+    "license_plate": "MNO303",
+    "description": "Transmission FlujobID Change",
+    "status": "Active"
+  },
+  {
+    "jobID": 7,
+    "car_info": "Mercedes-Benz C-Class",
+    "mileage": 40000,
+    "dateTime": "2023-07-15T15:00:00Z",
+    "license_plate": "PQR404",
+    "description": "Brake Pad Replacement",
+    "status": "Active"
+  },
+  {
+    "jobID": 8,
+    "car_info": "Audi A4",
+    "mileage": 48000,
+    "dateTime": "2023-08-22T08:45:00Z",
+    "license_plate": "STU505",
+    "description": "Coolant Flush",
+    "status": "Non-Active"
+  },
+  {
+    "jobID": 9,
+    "car_info": "Kia Optima",
+    "mileage": 32000,
+    "dateTime": "2023-09-05T10:10:00Z",
+    "license_plate": "VWX606",
+    "description": "Spark Plug Replacement",
+    "status": "Active"
+  },
+  {
+    "jobID": 10,
+    "car_info": "Hyundai Sonata",
+    "mileage": 60000,
+    "dateTime": "2023-10-12T13:30:00Z",
+    "license_plate": "YZA707",
+    "description": "Wheel Alignment",
+    "status": "Non-Active"
+  }
+]

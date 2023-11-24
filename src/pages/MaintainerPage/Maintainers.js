@@ -118,6 +118,7 @@ const Drivers = () => {
     const index = driverData.findIndex((driver) => driver.gov_id === driverID);
     newDrivers.splice(index, 1);
     setDriverData(newDrivers);
+    console.log(index);
   };
   //--------
   // return
@@ -128,7 +129,7 @@ const Drivers = () => {
         <table>
           <thead>
             <tr>
-              <th>Gov_id</th>
+              <th>name</th>
               <th>Name</th>
               <th>Surname</th>
               <th>Email</th>
@@ -238,4 +239,3 @@ const Drivers = () => {
     </div>
   );
 };
-export default Drivers;
