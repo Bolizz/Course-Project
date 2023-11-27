@@ -14,7 +14,9 @@
     grid-template-rows: repeat(2, 1fr);
     justify-items: center;
     row-gap: 100px;
+    column-gap: 100px;
 }
+
 .box{
     display: flex;
     justify-content: center;
