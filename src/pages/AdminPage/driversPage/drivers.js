@@ -1,13 +1,20 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
 import data from "../MOCK_DATA.json";
 import { useState } from "react";
 import EditableRow from "./editableRow";
-
+import axios from "axios";
 import ReadOnly from "./readOnly";
 const Drivers = () => {
+  const url = "";
   // data
-  const [driverData, setDriverData] = useState(data);
+  const [driverData, setDriverData] = useState([]);
+  useEffect(() => {
+    axios
+      .get(url)
+      .then((res) => setDriverData(res.data.data))
+      .catch((err) => console.log(err));
+  }, []);
   const [addNewDriver, setAddNewDriver] = useState({
     gov_id: "",
     first_name: "",
@@ -16,6 +23,7 @@ const Drivers = () => {
     number: "",
     address: "",
     license_code: "",
+    tasks: [],
   });
   const [getID, setID] = useState(null);
   const [editDriver, setEditDriver] = useState({
@@ -26,6 +34,7 @@ const Drivers = () => {
     number: "",
     address: "",
     license_code: "",
+    tasks: [],
   });
   //--------
   // adding functions
@@ -43,9 +52,12 @@ const Drivers = () => {
         number: addNewDriver.number,
         address: addNewDriver.address,
         license_code: addNewDriver.license_code,
+        tasks: addNewDriver.tasks,
       },
     ]);
-
+    axios.post(url, driverData).then((res) => {
+      console.log("Successful");
+    });
     setAddNewDriver({
       gov_id: "",
       first_name: "",
@@ -54,6 +66,7 @@ const Drivers = () => {
       number: "",
       address: "",
       license_code: "",
+      tasks: [],
     });
   };
 
@@ -71,6 +84,7 @@ const Drivers = () => {
       number: driver.number,
       address: driver.address,
       license_code: driver.license_code,
+      tasks: driver.tasks,
     });
   };
 
@@ -102,6 +116,9 @@ const Drivers = () => {
     };
     setDriverData(newEditdrivers);
     setID(null);
+    axios.post(url, driverData).then((res) => {
+      console.log("Successful");
+    });
   };
   const handleEditChange = (event) => {
     event.preventDefault();
@@ -118,6 +135,9 @@ const Drivers = () => {
     const index = driverData.findIndex((driver) => driver.gov_id === driverID);
     newDrivers.splice(index, 1);
     setDriverData(newDrivers);
+    axios.post(url, driverData).then((res) => {
+      console.log("Successful");
+    });
   };
   //--------
   // return

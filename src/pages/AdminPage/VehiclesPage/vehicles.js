@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Link, useLocation } from "react-router-dom";
-import data from "./MOCK_DATA.json";
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import EditableRow from "./editableRow";
 import axios from "axios";
 import ReadOnly from "./readOnly";
@@ -14,13 +14,20 @@ const Vehicles = () => {
   const url = "";
 
   // data
-  const [carData, setCarData] = useState(data);
+  const [carData, setCarData] = useState([]);
+  useEffect(() => {
+    axios
+      .get(url)
+      .then((res) => setCarData(res.data.carData))
+      .catch((err) => console.log(err));
+  }, []);
   const [addNewCar, setAddNewCar] = useState({
     model: "",
     year: "",
     license_plate: "",
     sitting_capacity: "",
     auction: false,
+    information: [],
   });
   const [getPlate, setPlate] = useState(null);
   const [editCar, setEditCar] = useState({
@@ -29,6 +36,7 @@ const Vehicles = () => {
     license_plate: "",
     sitting_capacity: "",
     auction: false,
+    information: [],
   });
   const [auctionCar, setAuctionCar] = useState([]);
 
@@ -54,15 +62,19 @@ const Vehicles = () => {
         license_plate: addNewCar.license_plate,
         sitting_capacity: addNewCar.sitting_capacity,
         auction: false,
+        information: addNewCar.information,
       },
     ]);
-
+    axios.post(url, carData).then((res) => {
+      console.log("Successful");
+    });
     setAddNewCar({
       model: "",
       year: "",
       license_plate: "",
       sitting_capacity: "",
       auction: false,
+      information: [],
     });
   };
 
@@ -78,6 +90,7 @@ const Vehicles = () => {
       license_plate: car.license_plate,
       sitting_capacity: car.sitting_capacity,
       auction: false,
+      information: car.information,
     });
   };
 
@@ -96,6 +109,7 @@ const Vehicles = () => {
       license_plate: editCar.license_plate,
       sitting_capacity: editCar.sitting_capacity,
       auction: editCar.auction,
+      information: editCar.information,
     };
     setCarData(newEditCars);
     setPlate(null);
@@ -118,6 +132,9 @@ const Vehicles = () => {
     const index = carData.findIndex((car) => car.license_plate === carPlate);
     newCars.splice(index, 1);
     setCarData(newCars);
+    axios.post(url, carData).then((res) => {
+      console.log("Successful");
+    });
   };
   // ----
   //-----add to auction-----
@@ -141,9 +158,12 @@ const Vehicles = () => {
           license_plate: sellCar.license_plate,
           sitting_capacity: sellCar.sitting_capacity,
           auction: true,
+          information: sellCar.information,
         },
       ]);
-      console.log(auctionCar);
+      axios.post(url, carData).then((res) => {
+        console.log("Successful");
+      });
     }
   };
 
@@ -236,9 +256,6 @@ const Vehicles = () => {
       <Link
         to={{
           pathname: "/auction",
-          state: {
-            auctionCar: auctionCar,
-          },
         }}
       >
         <p className="box">auction</p>

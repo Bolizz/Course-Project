@@ -1,22 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-
+import axios from "axios";
 const Auction = () => {
+  const url = "";
   const { state } = useLocation();
-  const [auctionCar, setAuctionCar] = useState(state.auctionCar);
-  var soldCars = [];
-  if (!state || !state.auctionCar || state.auctionCar.length === 0) {
+  const [auctionCar, setAuctionCar] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(url)
+      .then((res) => setAuctionCar(res.data.data))
+      .catch((err) => console.log(err));
+  }, []);
+  if (auctionCar.length() === 0) {
     return <p>No cars available for auction.</p>;
   }
-  const handleDeleteAuction = (carPlate) => {
+  const handleDeleteAuction = (carPlate, e) => {
+    e.preventDefault();
     var newCars = [...auctionCar];
     const index = auctionCar.findIndex((car) => car.license_plate === carPlate);
+    newCars[index].status = false;
+    setAuctionCar(newCars);
+    axios.post(url, newCars).then((res) => {
+      console.log("Successful");
+    });
     newCars.splice(index, 1);
     setAuctionCar(newCars);
   };
-  const onSold = (carPlate) => {
+  const onSold = (carPlate, e) => {
+    var newCars = [...auctionCar];
+    e.preventDefault();
     const index = auctionCar.findIndex((car) => car.license_plate === carPlate);
-    soldCars += index;
+    newCars.splice(index, 1);
+    setAuctionCar(newCars);
+    axios.post(url, auctionCar).then((res) => {
+      console.log("Successful");
+    });
   };
   return (
     <div>

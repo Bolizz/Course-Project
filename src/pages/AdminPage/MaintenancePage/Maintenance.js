@@ -3,9 +3,17 @@ import { Link, useLocation } from "react-router-dom";
 import EditableRow from "./editableRow";
 import ReadOnly from "./readOnly";
 import data from "./MOCK_DATA.json";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 const Maintenance = () => {
-  const [jobAssignment, setJobAssignment] = useState(data);
+  const url = "";
+  const [jobAssignment, setJobAssignment] = useState([]);
+  useEffect(() => {
+    axios
+      .get(url)
+      .then((res) => jobAssignment(res.data.data))
+      .catch((err) => console.log(err));
+  }, []);
   const [addNewJob, setAddNewJob] = useState({
     jobID: "",
     car_info: "",
@@ -47,7 +55,9 @@ const Maintenance = () => {
         status: addNewJob.status,
       },
     ]);
-
+    axios.post(url, jobAssignment).then((res) => {
+      console.log("Successful");
+    });
     setAddNewJob({
       jobID: "",
       car_info: "",
@@ -102,6 +112,9 @@ const Maintenance = () => {
       status: editJob.status,
     };
     setJobAssignment(neweditJobs);
+    axios.post(url, jobAssignment).then((res) => {
+      console.log("Successful");
+    });
     setJobID(null);
   };
   const handleEditChange = (event) => {
@@ -119,6 +132,9 @@ const Maintenance = () => {
     const index = jobAssignment.findIndex((job) => job.jobID === jobID);
     newJobs.splice(index, 1);
     setJobAssignment(newJobs);
+    axios.post(url, jobAssignment).then((res) => {
+      console.log("Successful");
+    });
   };
   // ----
   //-----add to auction-----

@@ -1,11 +1,18 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import EditableRow from "./editableRow";
 import ReadOnly from "./readOnly";
 import data from "./MOCK_DATA.json";
-import { useState } from "react";
+import axios from "axios";
 const Fueling = () => {
-  const [fueling, setFueling] = useState(data);
+  const url = "";
+  const [fueling, setFueling] = useState([]);
+  useEffect(() => {
+    axios
+      .get(url)
+      .then((res) => setFueling(res.data.data))
+      .catch((err) => console.log(err));
+  }, []);
   const [addNewFueling, setAddNewFueling] = useState({
     license_plate: "",
     fuelDate: "",
@@ -47,6 +54,9 @@ const Fueling = () => {
         first_name: addNewFueling.first_name,
         last_name: addNewFueling.last_name,
       },
+      axios.post(url, fueling).then((res) => {
+        console.log("Successful");
+      }),
     ]);
 
     setAddNewFueling({
@@ -102,6 +112,9 @@ const Fueling = () => {
     };
     setFueling(neweditFuelings);
     setID(null);
+    axios.post(url, fueling).then((res) => {
+      console.log("Successful");
+    });
   };
   const handleEditChange = (event) => {
     event.preventDefault();
@@ -120,6 +133,9 @@ const Fueling = () => {
     );
     newFueling.splice(index, 1);
     setFueling(newFueling);
+    axios.post(url, fueling).then((res) => {
+      console.log("Successful");
+    });
   };
   // ----
   //-----add to auction-----
