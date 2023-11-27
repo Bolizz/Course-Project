@@ -4,6 +4,8 @@ import EditableRow from "./editableRow";
 import ReadOnly from "./readOnly";
 import data from "./MOCK_DATA.json";
 import { useState } from "react";
+import '../styles.css';
+
 const Fueling = () => {
   const [fueling, setFueling] = useState(data);
   const [addNewFueling, setAddNewFueling] = useState({
@@ -131,7 +133,7 @@ const Fueling = () => {
   return (
     <div>
       <form onSubmit={handleEditFormSubmit}>
-        <table>
+        <table className="table">
           <thead>
             <tr>
               <th>License plate</th>
@@ -166,7 +168,7 @@ const Fueling = () => {
           </tbody>
         </table>
       </form>
-      <div>
+      <div className="submit-new">
         <form onSubmit={handleAddSubmit}>
           <input
             className="input"

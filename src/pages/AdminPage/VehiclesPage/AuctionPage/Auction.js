@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import '../../styles.css';
 
 const Auction = () => {
   const { state } = useLocation();
@@ -20,7 +21,7 @@ const Auction = () => {
   };
   return (
     <div>
-      <table>
+      <table className="table">
         <thead>
           <tr>
             <th>Model</th>
@@ -29,7 +30,7 @@ const Auction = () => {
             <th>Sitting Capacity</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="read-only">
           {state.auctionCar.map((car) => (
             <tr>
               <td>{car.model}</td>

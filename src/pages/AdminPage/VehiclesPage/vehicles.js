@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import data from "./MOCK_DATA.json";
 import { useState } from "react";
 import EditableRow from "./editableRow";
+import '../styles.css';
 
 import ReadOnly from "./readOnly";
 const Vehicles = () => {
@@ -143,7 +144,7 @@ const Vehicles = () => {
   return (
     <div>
       <form onSubmit={handleEditFormSubmit}>
-        <table>
+        <table className="table">
           <thead>
             <tr>
               <th>Model</th>
@@ -175,7 +176,7 @@ const Vehicles = () => {
           </tbody>
         </table>
       </form>
-      <div>
+      <div className="submit-new">
         <form onSubmit={handleAddSubmit}>
           <input
             className="input"
@@ -231,7 +232,7 @@ const Vehicles = () => {
           },
         }}
       >
-        <p className="box">auction</p>
+        <p className="box">Auction</p>
       </Link>
     </div>
   );

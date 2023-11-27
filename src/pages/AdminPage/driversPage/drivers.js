@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import data from "../MOCK_DATA.json";
 import { useState } from "react";
 import EditableRow from "./editableRow";
+import '../styles.css';
 
 import ReadOnly from "./readOnly";
 const Drivers = () => {
@@ -123,10 +124,10 @@ const Drivers = () => {
   // return
   //--------
   return (
-    <div>
+    <div >
       <form onSubmit={handleEditFormSubmit}>
-        <table>
-          <thead>
+        <table className="table">
+          <thead >
             <tr>
               <th>Gov_id</th>
               <th>Name</th>
@@ -160,7 +161,7 @@ const Drivers = () => {
           </tbody>
         </table>
       </form>
-      <div>
+      <div className="submit-new">
         <form onSubmit={handleAddSubmit}>
           <input
             className="input"

@@ -4,6 +4,7 @@ import EditableRow from "./editableRow";
 import ReadOnly from "./readOnly";
 import data from "./MOCK_DATA.json";
 import { useState } from "react";
+import '../styles.css';
 const Maintenance = () => {
   const [jobAssignment, setJobAssignment] = useState(data);
   const [addNewJob, setAddNewJob] = useState({
@@ -130,7 +131,7 @@ const Maintenance = () => {
   return (
     <div>
       <form onSubmit={handleEditFormSubmit}>
-        <table>
+        <table className="table">
           <thead>
             <tr>
               <th>jobID</th>
@@ -164,7 +165,7 @@ const Maintenance = () => {
           </tbody>
         </table>
       </form>
-      <div>
+      <div className="submit-new">
         <form onSubmit={handleAddSubmit}>
           <input
             className="input"

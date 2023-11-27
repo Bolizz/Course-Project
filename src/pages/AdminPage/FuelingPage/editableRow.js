@@ -1,8 +1,8 @@
 import React from "react";
-
+import '../styles.css';
 const EditableRow = ({ editFueling, handleEditChange, handleCancelClick }) => {
   return (
-    <tr>
+    <tr className="submit-new">
       <td>
         <td>
           <input
