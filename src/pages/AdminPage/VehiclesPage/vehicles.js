@@ -3,9 +3,16 @@ import { Link, useLocation } from "react-router-dom";
 import data from "./MOCK_DATA.json";
 import { useState } from "react";
 import EditableRow from "./editableRow";
-
+import axios from "axios";
 import ReadOnly from "./readOnly";
+
 const Vehicles = () => {
+  //----
+  // post
+  //----
+
+  const url = "";
+
   // data
   const [carData, setCarData] = useState(data);
   const [addNewCar, setAddNewCar] = useState({
@@ -92,6 +99,9 @@ const Vehicles = () => {
     };
     setCarData(newEditCars);
     setPlate(null);
+    axios.post(url, carData).then((res) => {
+      console.log("Successful");
+    });
   };
   const handleEditChange = (event) => {
     event.preventDefault();
